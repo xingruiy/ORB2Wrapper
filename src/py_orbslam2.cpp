@@ -1,9 +1,19 @@
-#include <opencv2/core/core.hpp>
+#include <pybind11/stl.h>
+#include <pybind11/eigen.h>
+#include <pybind11/numpy.h>
+#include <pybind11/pybind11.h>
+
 #include <ORB_SLAM2/KeyFrame.h>
 #include <ORB_SLAM2/Converter.h>
 #include <ORB_SLAM2/Tracking.h>
 #include <ORB_SLAM2/MapPoint.h>
+
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+
 #include "py_orbslam2.h"
+#include "ndarray_converter.h"
 
 namespace py = pybind11;
 
@@ -223,6 +233,7 @@ std::vector<Eigen::Matrix4f> ORBSLAM2Python::getTrajectory() const
 
 PYBIND11_MODULE(orbslam2, m)
 {
+    NDArrayConverter::init_numpy();
     py::enum_<ORB_SLAM2::Tracking::eTrackingState>(m, "TrackingState")
         .value("SYSTEM_NOT_READY", ORB_SLAM2::Tracking::eTrackingState::SYSTEM_NOT_READY)
         .value("NO_IMAGES_YET", ORB_SLAM2::Tracking::eTrackingState::NO_IMAGES_YET)
