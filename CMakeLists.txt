@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.4...3.18)
-project(orbslam2)
+project(ORB2Wrapper)
 
 LIST(APPEND CMAKE_MODULE_PATH 
     ${PROJECT_SOURCE_DIR}/cmake
@@ -13,12 +13,13 @@ find_package(OpenCV REQUIRED)
 find_package(Pangolin REQUIRED)
 find_package(ORB_SLAM2 REQUIRED)
 
-pybind11_add_module(orbslam2 
-    src/py_orbslam2.cpp
-    src/ndarray_converter.cpp
+pybind11_add_module(ORB2Wrapper 
+    src/ORB2Wrapper.cpp
+    src/NDArrayConverter.cpp
+    ORB_SLAM2/src/Frame.cc
 )
 
-target_link_libraries(orbslam2
+target_link_libraries(ORB2Wrapper
 PRIVATE
     Eigen3::Eigen
     ${OpenCV_LIBS}
@@ -27,7 +28,14 @@ PRIVATE
     ${ORB_SLAM2_LIBRARIES}
 )
 
-target_compile_definitions(orbslam2 
+target_compile_definitions(ORB2Wrapper 
 PRIVATE 
     VERSION_INFO=${EXAMPLE_VERSION_INFO}
+)
+
+target_include_directories(ORB2Wrapper
+PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/ORB_SLAM2>
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/ORB_SLAM2/include>
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/ORB_SLAM2/Thirdparty/DBoW2/DBoW2>
 )

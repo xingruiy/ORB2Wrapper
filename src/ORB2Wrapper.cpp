@@ -12,8 +12,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 
-#include "py_orbslam2.h"
-#include "ndarray_converter.h"
+#include "ORB2Wrapper.h"
+#include "NDArrayConverter.h"
 
 namespace py = pybind11;
 
@@ -231,7 +231,7 @@ std::vector<Eigen::Matrix4f> ORBSLAM2Python::getTrajectory() const
     return trajectory;
 }
 
-PYBIND11_MODULE(orbslam2, m)
+PYBIND11_MODULE(ORB2Wrapper, m)
 {
     NDArrayConverter::init_numpy();
     py::enum_<ORB_SLAM2::Tracking::eTrackingState>(m, "TrackingState")

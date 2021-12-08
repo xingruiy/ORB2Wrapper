@@ -7,7 +7,7 @@ This is a python binding for ORB_SLAM2. This project is inspired by [this](https
 * Tested on Ubuntu 20.04
 * gcc with C++11 support
 * CMake >= 3.4 or Pip 10+
-* Ninja or Pip 10+
+* Pip 10+
 
 ## Installation
 
@@ -22,3 +22,6 @@ pip install ./py_orbslam2
 
 With the `setup.py` file included in this example, the `pip install` command will
 invoke CMake and build the pybind11 module as specified in `CMakeLists.txt`.
+
+## FAQ
+1. `fatal error: numpy/ndarrayobject.h: No such file or directory`: install numpy with `sudo apt-get install python-numpy`
