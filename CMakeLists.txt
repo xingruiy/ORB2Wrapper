@@ -9,7 +9,7 @@ add_subdirectory(pybind11)
 
 find_package(DBoW2 REQUIRED)
 find_package(Eigen3 REQUIRED)
-find_package(OpenCV REQUIRED)
+find_package(OpenCV 3 REQUIRED)
 find_package(Pangolin REQUIRED)
 find_package(ORB_SLAM2 REQUIRED)
 
